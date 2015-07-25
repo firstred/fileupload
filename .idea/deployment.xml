@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="michaeldekker.com" filePermissions="511" folderPermissions="511">
+    <serverData>
+      <paths name="michaeldekker.com">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/var/www/pdev/modules/fileupload" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="old.mijnpresta.nl">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/var/www/pold/modules/fileupload" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>
