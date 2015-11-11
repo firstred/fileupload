@@ -41,6 +41,27 @@ class FileUpload extends Module
 
         $this->displayName = $this->l('File upload');
         $this->description = $this->l('Allows your customers to upload files');
+
+        // Checksums of original files
+        $this->md5sums = array(
+            '4e777e6b21b64250627579c8928bcb6d',
+            '50d48f07275ffd37680417b313390823',
+            'ddd07f1a716a1a9ba5ba7df5ff2f6ebe',
+            '4b08e7271129c7c8b06697909d6a2b19',
+            '418f209271694e04eaaccf7be84638e0',
+            '1d7aeb7dfb45cb00dc60b5bd3d935e4b',
+            '63204232fea87a6b026166a734b4970a',
+            '7982d865c3c95e38b8c3b53c031c24f7',
+            'e2188c2d7b742b6d164b3baddad2357e',
+            '7982d865c3c95e38b8c3b53c031c24f7',
+            'd9697235a0e15aaf503bb2ed8787ade5',
+            'c2dfd830d725422d37080db66b30644e',
+            '0dd9a24e32016dcd692d0f5d155d3222',
+            '8a9ce15c0db5f791d2f10b45d61c0d51',
+            'c67783e491e97c671aacafa78cb403ed',
+            '54a1b00dc1d3ffafdf3060638a507074',
+            '7e8f09de8d336c8e52bbde3a88e907c0'
+        );
     }
 
     /**
@@ -50,7 +71,9 @@ class FileUpload extends Module
     public function install()
     {
         if (is_file(_PS_MODULE_DIR_.'fileupload/copy/displayImage.php')) {
-            rename(_PS_ADMIN_DIR_.'/displayImage.php', _PS_MODULE_DIR_.'fileupload/backup/displayImage.php');
+            if (in_array(md5(Tools::file_get_contents(_PS_ADMIN_DIR_.'/displayImage.php')), $this->md5sums)) {
+                rename(_PS_ADMIN_DIR_.'/displayImage.php', _PS_MODULE_DIR_.'fileupload/backup/displayImage.php');
+            }
             unlink(_PS_ADMIN_DIR_.'/displayImage.php');
             copy(_PS_MODULE_DIR_.'fileupload/copy/displayImage.php', _PS_ADMIN_DIR_.'/displayImage.php');
         } else {
@@ -62,7 +85,8 @@ class FileUpload extends Module
 
     public function uninstall()
     {
-        if (is_file(_PS_MODULE_DIR_.'fileupload/backup/displayImage.php')) {
+        if (is_file(_PS_MODULE_DIR_.'fileupload/backup/displayImage.php') &&
+            !in_array(md5(Tools::file_get_contents(_PS_ADMIN_DIR_.'/displayImage.php')), $this->md5sums)) {
             unlink(_PS_ADMIN_DIR_.'/displayImage.php');
             rename(_PS_MODULE_DIR_.'fileupload/backup/displayImage.php', _PS_ADMIN_DIR_.'/displayImage.php');
         }

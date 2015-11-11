@@ -6,7 +6,9 @@
 *  @license   http://opensource.org/licenses/osl-3.0.php Open Software License (OSL 3.0)
 *}
 {if $smarty.const._PS_VERSION_|@addcslashes:'\'' < '1.6'}
+<br />
 <fieldset>
+	<legend>{l s='Miscellaneous' mod='fileupload'}</legend>
 	<h4> {l s='Donate' mod='fileupload'}</h4>
 	<p>
 		{l s='If this module helped you, please make a donation to support further development.' mod='fileupload'}<br />
