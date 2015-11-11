@@ -3,7 +3,7 @@
 	<name>fileupload</name>
 	<displayName><![CDATA[File upload]]></displayName>
 	<version><![CDATA[1.0.0]]></version>
-	<description><![CDATA[Allow your customers to upload files]]></description>
+	<description><![CDATA[Allows your customers to upload files]]></description>
 	<author><![CDATA[Michael Dekker]]></author>
 	<tab><![CDATA[front_office_features]]></tab>
 	<is_configurable>1</is_configurable>
