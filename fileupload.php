@@ -80,9 +80,9 @@ class FileUpload extends Module
         $lang_id = $this->context->language->id;
 
         $override_error = $this->l('Overrides are disabled. This modules doesn\'t work without overrides. Go to').' "'.
-            Db::getInstance()->getValue('SELECT `name` FROM `'._DB_PREFIX_.'tab_lang` WHERE id_tab = 17 AND id_lang ='.$lang_id).
+            Db::getInstance()->getValue('SELECT `name` FROM `'._DB_PREFIX_.'tab_lang` WHERE id_tab = 17 AND id_lang ='.pSQL($lang_id)).
             ' > '.
-            Db::getInstance()->getValue('SELECT `name` FROM `'._DB_PREFIX_.'tab_lang` WHERE id_tab = 77 AND id_lang ='.$lang_id).
+            Db::getInstance()->getValue('SELECT `name` FROM `'._DB_PREFIX_.'tab_lang` WHERE id_tab = 77 AND id_lang ='.pSQL($lang_id)).
             '" '.$this->l('and make sure that the option').' "'.
             Translate::getAdminTranslation('Disable all overrides', 'AdminPerformance').
             '" '.$this->l('is set to').' "'.
@@ -172,6 +172,11 @@ class FileUpload extends Module
         } else {
             $helper->fields_value['FILEUPLOAD_FILE_EXTS'] = '';
         }
-        return $output.$helper->generateForm($fields_form);
+        return $output.$helper->generateForm($fields_form).$this->displayExtra();
+    }
+
+    protected function displayExtra()
+    {
+        return $this->display(__FILE__, 'views/templates/admin/extra.tpl');
     }
 }
